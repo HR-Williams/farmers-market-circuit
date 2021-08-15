@@ -1,0 +1,40 @@
+import React from 'react';
+import ProduceList from './ProduceList';
+import MarketList from './MarketList';
+
+class MarketControl extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      produceListVisibleOnPage: false
+    };
+  }
+
+  handleClick = () => {
+      this.setState(prevState => ({
+        produceListVisibleOnPage: !prevState.produceListVisibleOnPage
+      }));
+    }
+
+  render(){
+      let currentlyVisibleState = null;
+      let buttonText = null; // new code
+      if (this.state.produceListVisibleOnPage) { 
+        currentlyVisibleState = <ProduceList />;
+        buttonText = "Return to Market List"; // new code
+    } else {
+      currentlyVisibleState = <MarketList />;
+      buttonText = "See Seasonal Produce Lists"; // new code
+    }
+    return (
+      <React.Fragment>
+        {currentlyVisibleState}
+        <button onClick={this.handleClick}>{buttonText}</button> 
+      </React.Fragment>
+    );
+  }
+
+}
+
+export default MarketControl;
